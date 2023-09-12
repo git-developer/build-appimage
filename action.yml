@@ -15,4 +15,4 @@ inputs:
 runs:
   using: 'docker'
   image: docker://appimagecrafters/appimage-builder:1.1.0
-  args: ${{ fromJson(format('["appimage-builder", "--recipe=${{ github.event.inputs.recipe }}", {0}]', github.event.inputs.args)) }}
+  args: ${{ fromJson(format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args)) }}
