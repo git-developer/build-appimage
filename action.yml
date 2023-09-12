@@ -9,13 +9,10 @@ inputs:
     required: true
     default: 'AppImageBuilder.yml'
   args:
-    description: 'appimage-builder arguments'
+    description: 'appimage-builder arguments as comma-separated list'
     required: false
-    default: '--skip-test'
+    default: '--skip-tests'
 runs:
   using: 'docker'
   image: docker://appimagecrafters/appimage-builder:1.1.0
-  args:
-    - appimage-builder
-    - '--recipe=${{ inputs.recipe }}' 
-    - '${{ inputs.args }}'
+  args: ${{ fromJson(format('["appimage-builder", "--recipe=${{ inputs.recipe }}", {0}]', inputs.args)) }}
