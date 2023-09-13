@@ -12,9 +12,11 @@ inputs:
     description: 'appimage-builder arguments as comma-separated list'
     required: false
     default: '--skip-tests'
+env:
+  ARG_LINE: ${{ format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args) }}
 runs:
   using: composite
   steps:
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
       with:
-        args: ${{ fromJson(format('["appimage-builder", "--recipe={0}", "{1}"]', inputs.recipe, inputs.args)) }}
+        args: ${{ fromJson(format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args)) }}
