@@ -15,6 +15,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: docker://appimagecrafters/appimage-builder:1.1.0
+    - uses: docker://git-developer/appimage-builder:quoting
       with:
         args: appimage-builder --recipe=${{inputs.recipe}} ${{inputs.args}}
