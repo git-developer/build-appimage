@@ -16,5 +16,5 @@ runs:
   using: 'docker'
   image: docker://appimagecrafters/appimage-builder:1.1.0
   env:
-    args: ${{ format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args) }}
-  args: ${{ fromJson(env.args) }}
+    ARGS: ${{ format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args) }}
+  args: ${{ fromJson($ARGS) }}
