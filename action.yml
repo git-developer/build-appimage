@@ -9,7 +9,7 @@ inputs:
     required: true
     default: 'AppImageBuilder.yml'
   args:
-    description: 'appimage-builder arguments as comma-separated list'
+    description: 'appimage-builder arguments'
     required: false
     default: '--skip-tests'
 runs:
