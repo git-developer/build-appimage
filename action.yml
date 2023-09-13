@@ -18,7 +18,7 @@ runs:
     - id: transform
       shell: bash
       run: |
-        jq -Rncr '"args=" + ([inputs] | tostring | @sh)' >>"${GITHUB_OUTPUT}" <<EOF
+        jq -Rncr '"args=" + ([inputs] | map(select(length>0)) | tostring | @sh)' >>"${GITHUB_OUTPUT}" <<EOF
         appimage-builder
         --recipe=${{inputs.recipe}}
         ${{inputs.args}}
