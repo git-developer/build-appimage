@@ -14,9 +14,9 @@ inputs:
     default: '--skip-tests'
 runs:
   using: composite
-  env:
-    ARG_LINE: ${{ format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args) }}
   steps:
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
+      env:
+        ARG_LINE: ${{ format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args) }}
       with:
         args: ${{ fromJson(format('["appimage-builder", "--recipe={0}", {1}]', inputs.recipe, inputs.args)) }}
