@@ -15,14 +15,6 @@ inputs:
 runs:
   using: composite
   steps:
-    - id: transform
-      shell: bash
-      run: |
-        jq -Rncr '"args=" + ([inputs] | map(select(length>0)) | tostring | @sh)' >>"${GITHUB_OUTPUT}" <<EOF
-        appimage-builder
-        --recipe=${{inputs.recipe}}
-        ${{inputs.args}}
-        EOF
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
       with:
-        args: ${{ join(fromJson(steps.transform.outputs.args), ' ') }}
+        args: appimage-builder --recipe=${{inputs.recipe}} ${{inputs.args}}
