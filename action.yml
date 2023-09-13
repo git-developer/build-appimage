@@ -25,4 +25,4 @@ runs:
         EOF
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
       with:
-        args: ${{ fromJson(steps.transform.outputs.args) }}
+        args: ${{ join(fromJson(steps.transform.outputs.args), ' ') }}
