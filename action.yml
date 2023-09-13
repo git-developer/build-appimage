@@ -18,11 +18,11 @@ runs:
     - id: transform
       shell: bash
       run: |
-      jq -Rncr '"args=" + ([inputs] | tostring | @sh)' >>"${GITHUB_OUTPUT}" <<EOF
-      appimage-builder
-      --recipe=${{inputs.recipe}}
-      ${{inputs.args}}
-      EOF
+        jq -Rncr '"args=" + ([inputs] | tostring | @sh)' >>"${GITHUB_OUTPUT}" <<EOF
+        appimage-builder
+        --recipe=${{inputs.recipe}}
+        ${{inputs.args}}
+        EOF
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
       with:
         args: ${{ fromJson(steps.transform.output.args) }}
