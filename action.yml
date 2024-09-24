@@ -12,9 +12,17 @@ inputs:
     description: 'appimage-builder arguments'
     required: false
     default: '--skip-tests'
+  command:
+    description: 'appimage-builder start command'
+    required: false
 runs:
   using: composite
   steps:
     - uses: docker://appimagecrafters/appimage-builder:1.1.0
+      if: ${{!inputs.command}}
       with:
         args: appimage-builder --recipe=${{inputs.recipe}} ${{inputs.args}}
+    - uses: docker://appimagecrafters/appimage-builder:1.1.0
+      if: inputs.command
+      with:
+        args: ${{inputs.command}}
